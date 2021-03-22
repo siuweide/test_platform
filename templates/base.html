@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/classic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block title %}
+    <title>Title</title>
+{% endblock %}
+</head>
+<body>
+{% block base %}
+    <!-- 所有HTML都是继承这个页面 -->
+{% endblock %}
+</body>
+</html>

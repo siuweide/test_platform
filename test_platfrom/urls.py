@@ -20,5 +20,7 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login),
-    path('project/', include('app_manage.urls'))
+    path('logout/', views.logout),
+
+    path('project/', include('app_manage.urls')),
 ]
