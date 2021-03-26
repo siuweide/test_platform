@@ -1,18 +1,22 @@
 {% extends 'manage.html' %}
 {% block title %}
     <title>项目管理</title>
+    <style>
+        .dataTables_info{
+            float: left;
+        }
+        .pagination{
+            margin-top: 5px;
+        }
+    </style>
 {% endblock %}
 {% block manage %}
 <div class="card flex-fill">
     <div class="card-header">
         <h5 class="card-title mb-0" style="float:left">项目管理</h5>
-        <button onclick="add()" type="button" class="btn btn-primary" style="float:right">创建</button>
+        <a href="{% url 'add_project' %}"><button type="button" class="btn btn-primary" style="float:right">创建</button></a>
     </div>
     <div id="datatables-dashboard-traffic_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-        <div class="row">
-            <div class="col-sm-12 col-md-6"></div>
-            <div class="col-sm-12 col-md-6"></div>
-        </div>
         <div class="row">
             <div class="col-sm-12">
                 <table id="datatables-dashboard-traffic" class="table table-striped my-0 dataTable no-footer"
@@ -36,8 +40,8 @@
                             <td>{{ p.status }}</td>
                             <td>{{ p.create_time |date:"Y-m-d H:i:s"}}</td>
                             <td>
-                                <a href="/manage/project_edit/{{p.id}}/">编辑</a>
-                                <a href="/manage/project_delete/{{p.id}}/" id="delete-project-id">删除</a>
+                                <a href="{% url 'edit_project' p.id %}">编辑</a>
+                                <a href="{% url 'delete_project' p.id %}" id="delete-project-id">删除</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -47,4 +51,37 @@
         </div>
     </div>
 </div>
+<div>
+<div class="row">
+    <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="datatables-dashboard-traffic_info" role="status" aria-live="polite">
+            共 {{ projectList.paginator.num_pages }} 页，{{ projectList.paginator.count }} 条数据
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="datatables-dashboard-traffic_paginate">
+            <ul class="pagination">
+                <li class="paginate_button page-item previous disabled"
+                    id="datatables-dashboard-traffic_previous">
+                    {% if projectList.has_previous %}
+                    <a href="?page={{ projectList.previous_page_number }}" aria-controls="datatables-dashboard-traffic" data-dt-idx="0" tabindex="0"
+                        class="page-link">Previous</a>
+                    {% endif %}
+                </li>
+                <li class="paginate_button page-item active">
+                    <a href="#" aria-controls="datatables-dashboard-traffic" data-dt-idx="1" tabindex="0"
+                        class="page-link">{{ projectList.number }}</a>
+                </li>
+                <li class="paginate_button page-item next disabled" id="datatables-dashboard-traffic_next">
+                    {% if projectList.has_next %}
+                    <a href="?page={{ projectList.next_page_number }}" aria-controls="datatables-dashboard-traffic" data-dt-idx="2" tabindex="0"
+                        class="page-link">Next</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
