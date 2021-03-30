@@ -1,6 +1,7 @@
-from django.forms import ModelForm, Textarea, TextInput
-from django.forms import widgets
-from app_manage.models import Project
+from django.forms import ModelForm, Textarea, TextInput, ModelChoiceField
+from app_manage.models import Project, Module
+
+MODULE = Module.objects.all()
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -9,4 +10,14 @@ class ProjectForm(ModelForm):
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),
             'describe': Textarea(attrs={'class': 'form-control'})
+        }
+
+class ModuleForm(ModelForm):
+    class Meta:
+        model = Module
+        fields = ['project', 'name', 'describe', 'status']
+        widgets = {
+            # 'project': ModelChoiceField(queryset=MODULE),
+            'name': TextInput(attrs={'class': 'form-control'}),
+            'describe': Textarea(attrs={'class': 'form-control'}),
         }

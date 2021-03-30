@@ -40,7 +40,7 @@
                             <td>{{ p.status }}</td>
                             <td>{{ p.create_time |date:"Y-m-d H:i:s"}}</td>
                             <td>
-                                <a href="{% url 'edit_project' p.id %}">编辑</a>
+                                <a href="{% url 'edit_project' p.id %}#">编辑</a>
                                 <a href="{% url 'delete_project' p.id %}" id="delete-project-id">删除</a>
                             </td>
                         </tr>
@@ -62,23 +62,19 @@
     <div class="col-sm-12 col-md-7">
         <div class="dataTables_paginate paging_simple_numbers" id="datatables-dashboard-traffic_paginate">
             <ul class="pagination">
-                <li class="paginate_button page-item previous disabled"
-                    id="datatables-dashboard-traffic_previous">
-                    {% if projectList.has_previous %}
-                    <a href="?page={{ projectList.previous_page_number }}" aria-controls="datatables-dashboard-traffic" data-dt-idx="0" tabindex="0"
-                        class="page-link">Previous</a>
+                {% if projectList.has_previous %}
+                <a href="?page={{ projectList.previous_page_number }}" aria-controls="datatables-dashboard-traffic" data-dt-idx="0" tabindex="0" class="page-link">
+                    上一页
+                </a>
                     {% endif %}
-                </li>
                 <li class="paginate_button page-item active">
                     <a href="#" aria-controls="datatables-dashboard-traffic" data-dt-idx="1" tabindex="0"
                         class="page-link">{{ projectList.number }}</a>
                 </li>
-                <li class="paginate_button page-item next disabled" id="datatables-dashboard-traffic_next">
-                    {% if projectList.has_next %}
-                    <a href="?page={{ projectList.next_page_number }}" aria-controls="datatables-dashboard-traffic" data-dt-idx="2" tabindex="0"
-                        class="page-link">Next</a>
-                    {% endif %}
-                </li>
+                {% if projectList.has_next %}
+                <a href="?page={{ projectList.next_page_number }}" aria-controls="datatables-dashboard-traffic" data-dt-idx="2" tabindex="0"
+                    class="page-link">下一页</a>
+                {% endif %}
             </ul>
         </div>
     </div>

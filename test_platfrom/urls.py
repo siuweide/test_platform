@@ -22,5 +22,5 @@ urlpatterns = [
     path('login/', views.login),
     path('logout/', views.logout),
 
-    path('project/', include('app_manage.urls')),
+    path('manage/', include('app_manage.urls')),
 ]

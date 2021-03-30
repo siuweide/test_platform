@@ -1,0 +1,53 @@
+{% extends 'manage.html' %}
+{% block title %}
+    <title>模块管理</title>
+{% endblock %}
+{% block manage %}
+<div class="card flex-fill">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="float:left">模块管理</h5>
+        <a href="{% url 'add_module' %}"><button type="button" class="btn btn-primary" style="float:right">创建</button></a>
+    </div>
+    <div id="datatables-dashboard-traffic_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="datatables-dashboard-traffic" class="table table-striped my-0 dataTable no-footer"
+                    role="grid" aria-describedby="datatables-dashboard-traffic_info">
+                    <thead>
+                        <tr role="row">
+                            <th>id</th>
+                            <th>名称</th>
+                            <th>描述</th>
+                            <th>状态</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if moduleList %}
+                        {% for m in moduleList %}
+                        <tr role="row" class="odd">
+                            <td>{{ m.id }}</td>
+                            <td>{{ m.name }}</td>
+                            <td>{{ m.describe }}</td>
+                            <td>{{ m.status }}</td>
+                            <td>{{ m.create_time |date:"Y-m-d H:i:s"}}</td>
+                            <td>
+                                <a href="#">编辑</a>
+                                <a href="#" id="delete-project-id">删除</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                     {% else %}
+                        <tr align="center">
+                            <th colspan="6" >暂无数据</th>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
