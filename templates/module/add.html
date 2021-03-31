@@ -11,6 +11,9 @@
             float: right;
             margin-right: -275px
         }
+        select[name="project"]{
+
+        }
     </style>
 {% endblock %}
 {% block manage %}
@@ -23,7 +26,18 @@
             <div class="col-sm-12">
                 <div id="addPjForm">
                     <form action="{% url 'add_project' %}" method="post">
-                        {{ forms }}
+                        <div>
+                            <labe>项目名称：</labe><br/>
+                            {{ forms.project }}
+                        </div>
+                        <div>
+                            <labe>模块名称：</labe><br/>
+                            {{ forms.name }}
+                        </div>
+                        <div>
+                            <label>描述：</label><br/>
+                            {{ forms.describe }}
+                        </div>
                         {% csrf_token %}
                         <br>
                         {{ errors }}
