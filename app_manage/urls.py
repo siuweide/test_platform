@@ -11,6 +11,6 @@ urlpatterns = [
     path('project_delete/<int:pid>/', project_views.delete, name='delete_project'),
 
     # 模块管理
-    path('module_list', module_views.list, name='list_module'),
-    path('module_add', module_views.add, name='add_module')
+    path('module_list/', module_views.list, name='list_module'),
+    path('module_add/', module_views.add, name='add_module')
 ]
