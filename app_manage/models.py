@@ -10,6 +10,9 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('-create_time',)
+
 class Module(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField('模块名称', max_length=100)
@@ -20,3 +23,6 @@ class Module(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ('-create_time',)

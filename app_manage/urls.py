@@ -12,5 +12,7 @@ urlpatterns = [
 
     # 模块管理
     path('module_list/', module_views.list, name='list_module'),
-    path('module_add/', module_views.add, name='add_module')
+    path('module_add/', module_views.add, name='add_module'),
+    path('module_edit/<int:mid>/', module_views.edit, name='edit_module'),
+    path('module_delete/<int:mid>/', module_views.delete, name='delete_module')
 ]
