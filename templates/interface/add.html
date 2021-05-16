@@ -1,0 +1,162 @@
+{% extends "manage.html" %}
+{% load static %}
+{% block title %}
+    <title>创建接口或调试</title>
+{% endblock %}
+{% block manage %}
+<div class="card flex-fill">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="float:left">创建接口或调试</h5>
+    </div>
+
+    <div class="reqtype-url" style="margin-left: 20px">
+        <div>
+            <select class="form-control" id="req_method" style="width: 100px;float: left">
+            <option value ="GET">GET</option>
+            <option value ="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+            </select>
+            <div>
+                <input type="text" id="req_url" class="form-control" style="width: 60%;height:40px;float:left;">
+            </div>
+
+            <div id="send_req" >
+                <button style="height: 38px;margin-left: 20px;float: left"
+                        class="btn btn-primary" type="button" onclick="sendFun()">发送</button>
+            </div>
+
+            <div id="save_api" >
+                <button style="height: 38px;margin-left: 20px"
+                        class="btn btn-secondary" type="button"
+                        data-toggle="modal" data-target="#exampleModal">保存接口
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">保存接口</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>
+                <label>接口名称：</label>
+                <input type="text" id="req_name" class="form-control" style="margin-bottom: 10px">
+            </div>
+            <div>
+                <label>项目：</label>
+                <select class="form-control" id="projectsList" style="margin-bottom: 10px">
+                </select>
+            </div>
+            <div>
+                <label>模块：</label>
+                <select class="form-control" id="modulesList">
+                </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary"
+                    onclick="saveApi()">保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- tab标签 -->
+    <div class="bg_main" style="margin-left: 20px">
+        <div class="bg_left">
+            <ul class="nav nav-pills nav-stacked" style="width: 100%;margin-top: 10px;margin-bottom: 10px">
+                <li class="active"><a href="#headers" data-toggle="tab" style="color: black">Headers</a></li>
+                <li><a href="#body" data-toggle="tab" style="color: black;margin-left: 20px">Body</a></li>
+                <li><a href="#assert" data-toggle="tab" style="color: black;margin-left: 20px">Assert</a></li>
+            </ul>
+        </div>
+
+        <!-- tab内容 -->
+        <div class="bg_body">
+            <div class="tab-content" style="float: left; height: 90%;width: 90%;">
+                <!--请求头-->
+                <div class="tab-pane active" id="headers">
+                    <div class="input-group">
+                        <span class="input-group-addon option-title"></span>
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div id="headerEditor" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:#8B8989">说明：以字典的方式设置请求头，如：{"headers":"Firefox"}</p>
+                </div>
+
+                <!--参数类型-->
+                <div class="tab-pane" id="body">
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" name="par_type" id="form" value="form" checked> form-data
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="par_type" id="json" value="json"> JSON
+                        </label>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon option-title"></span>
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div id="parameterEditor" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:#8B8989">说明：以字典的方式设置参数，如：{"id":1, "name":"名称"}</p>
+                </div>
+
+                <!-- 断言 -->
+                <div class="tab-pane" id="assert">
+                    <!-- 断言类型 -->
+                    <div class="option">
+                        <label class="radio-inline">
+                            <input type="radio" name="assert_type" id="include" value="include" checked> 包含
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="assert_type" id="equal" value="equal"> 相等
+                        </label>
+
+                    <!--断言内容-->
+                    </div>
+                        <label>断言内容：</label>
+                        <div style="margin-bottom: 10px;">
+                            <textarea id="assert_content" class="form-control" rows="8" name=textarea></textarea>
+                        </div>
+
+                        <!--断言结果-->
+                        <label>断言结果：</label>
+                        <div style="margin-top: 0px;">
+                            <textarea id="assert_result" class="form-control" rows="2" name=textarea></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<link rel="stylesheet" href="{% static 'css/jquery.jsonview.css' %}">
+<link href="{% static 'css/jsoneditor.css' %}" rel="stylesheet">
+<script src="{% static 'js/jquery.jsonview.js' %}"></script>
+<script src="{% static 'js/jsoneditor.js' %}"></script>
+<script type="text/javascript">
+
+    //初始化JSONeditor编辑框
+    var headers = document.getElementById('headerEditor');
+    var options = {
+    mode: "code"
+    };
+    var headersEditor = new JSONEditor(headers, options);
+</script>
+{% endblock %}

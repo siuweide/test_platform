@@ -11,7 +11,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user:
             auth.login(request, user)
-            response = redirect('/project/list/')
+            response = redirect('/manage/project_list/')
             response.set_cookie('user', username, 3600)
             return response
         else:

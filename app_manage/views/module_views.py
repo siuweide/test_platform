@@ -27,6 +27,7 @@ def add(request):
                                   describe=describe)
             return redirect('list_module')
 
+
 def edit(request, mid):
     if request.method == "GET":
         if mid:

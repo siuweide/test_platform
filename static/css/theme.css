@@ -1970,10 +1970,10 @@ pre code {
 
 .form-control {
   display: block;
-  width: 122%;
-  height: 45px;
+  /*width: 122%;*/
+  height: 40px;
   padding: 0.75rem 1rem;
-  font-size: 1rem;
+  /*font-size: 1rem;*/
   font-weight: 400;
   line-height: 1.7;
   color: #151b26;
