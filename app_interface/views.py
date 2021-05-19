@@ -46,5 +46,5 @@ def get_select_data(request):
             project_dict['moduleList'] = module_list
             data_list.append(project_dict)
 
-        return JsonResponse({"data": data_list})
+        return JsonResponse({"status": 10200, "message": "success", "data": data_list})
 
