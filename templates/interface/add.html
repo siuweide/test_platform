@@ -157,10 +157,12 @@
 
     //初始化JSONeditor编辑框
     var headers = document.getElementById('headerEditor');
+    var parameter = document.getElementById('parameterEditor');
     var options = {
     mode: "code"
     };
     var headersEditor = new JSONEditor(headers, options);
+    var parameterEditor = new JSONEditor(parameter, options);
 </script>
 <style>
         div.jsoneditor-menu {
